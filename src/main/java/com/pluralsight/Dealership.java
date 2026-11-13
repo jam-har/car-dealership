@@ -61,7 +61,12 @@ public class Dealership {
     public List<Vehicle> getAllVehicles() {
         return List.of();
     }
-    public void addVehicle(Vehicle vehicle) {}
-    public void removeVehicle(Vehicle vehicle) {}
+    public void addVehicle(Vehicle vehicle) {
+        inventory.add(vehicle);
+
+    }
+    public void removeVehicle(Vehicle vehicle) {
+        inventory.remove(vehicle);
+    }
 
 }
