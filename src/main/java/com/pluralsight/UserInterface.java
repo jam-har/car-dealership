@@ -50,12 +50,20 @@ public class UserInterface {
     public void processGetByColorRequest() {};
     public void processGetByMileageRequest() {};
     public void processGetByVehicleTypeRequest() {};
-    public void processGetAllVehiclesRequest() {};
+    public void processGetAllVehiclesRequest() {
+        displayVehicles(dealership.getAllVehicles());
+    };
     public void processAddVehicleRequest() {};
     public void processRemoveVehicleRequest() {};
     private void init() {
         DealershipFileManagement dealershipFileManagement = new DealershipFileManagement();
         this.dealership = dealershipFileManagement.getDealership();
+    }
+    private void displayVehicles(List list) {
+        for (Object o : list) {
+            System.out.println(o.toString());
+        }
+
     }
 
 }
