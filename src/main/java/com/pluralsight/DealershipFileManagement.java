@@ -30,6 +30,7 @@ public class DealershipFileManagement {
                 dealership.addVehicle(vehicle);
 
 
+
             }
         } catch (Exception e) {
             throw new RuntimeException(e);

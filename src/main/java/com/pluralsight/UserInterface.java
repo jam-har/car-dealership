@@ -52,14 +52,14 @@ public class UserInterface {
         System.out.println("Enter your maximum price");
         BigDecimal max = BigDecimal.valueOf(scanner.nextInt());
         scanner.nextLine();
-        dealership.getVehiclesByPrice(min, max);
+        displayVehicles(dealership.getVehiclesByPrice(min,max));
     }
     public void processGetByMakeModelRequest() {
         System.out.println("Enter the make");
         String make = scanner.nextLine().trim();
         System.out.println("Enter the model");
         String model = scanner.nextLine().trim();
-        dealership.getVehiclesByMakeModel(make, model);
+        displayVehicles(dealership.getVehiclesByMakeModel(make, model));
     }
     public void processGetByYearRequest() {
         System.out.println("Enter the newest year");
@@ -68,12 +68,12 @@ public class UserInterface {
         System.out.println("Enter the oldest year");
         int max = scanner.nextInt();
         scanner.nextLine();
-        dealership.getVehiclesByYear(min, max);
+        displayVehicles(dealership.getVehiclesByYear(min, max));
     }
     public void processGetByColorRequest() {
         System.out.println("Enter the color");
         String color = scanner.nextLine().trim();
-        dealership.getVehiclesByColor(color);
+        displayVehicles(dealership.getVehiclesByColor(color));
     }
     public void processGetByMileageRequest() {
         System.out.println("Enter the minimum mileage");
@@ -82,12 +82,12 @@ public class UserInterface {
         System.out.println("Enter the maximum mileage");
         int max = scanner.nextInt();
         scanner.nextLine();
-        dealership.getVehiclesByMileage(min, max);
+        displayVehicles(dealership.getVehiclesByMileage(min, max));
     }
     public void processGetByVehicleTypeRequest() {
         System.out.println("Enter the vehicle type (car, truck, SUV, van");
         String type = scanner.nextLine().trim();
-        dealership.getVehiclesByType(type);
+        displayVehicles(dealership.getVehiclesByType(type));
     }
     public void processGetAllVehiclesRequest() {
         displayVehicles(dealership.getAllVehicles());
