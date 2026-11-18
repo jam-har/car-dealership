@@ -98,7 +98,7 @@ public class UserInterface {
         scanner.nextLine();
         System.out.println("Enter the year");
         int year = scanner.nextInt();
-        scanner.nextInt();
+        scanner.nextLine();
         System.out.println("Enter the make");
         String make = scanner.nextLine();
         System.out.println("Enter the model");
@@ -114,10 +114,11 @@ public class UserInterface {
         BigDecimal price = new BigDecimal(scanner.nextInt());
 
         Vehicle vehicle = new Vehicle(vin, year, make, model, vehicleType, color, odometer, price);
+        dealership.addVehicle(vehicle);
 
         System.out.println("You have added a vehicle");
 
-        dealershipFileManagement.saveDealership();
+        dealershipFileManagement.saveDealership(dealership);
 
     }
     public void processRemoveVehicleRequest() {
@@ -137,7 +138,7 @@ public class UserInterface {
             System.out.println("No vehicles found");
         }
 
-        dealershipFileManagement.saveDealership();
+        dealershipFileManagement.saveDealership(dealership);
 
     }
     private void init() {

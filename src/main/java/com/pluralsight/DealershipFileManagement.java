@@ -16,13 +16,14 @@ public class DealershipFileManagement {
             String dealershipNumber = tokens[2];
             dealership = new Dealership(dealershipName, dealershipAddress, dealershipNumber);
             while ((csvLine = bufferedReader.readLine()) != null) {
-                int vin = Integer.parseInt(tokens[0]);
-                int year = Integer.parseInt(tokens[1]);
+                tokens = csvLine.split("\\|");
+                int vin = Integer.parseInt(tokens[0].trim());
+                int year = Integer.parseInt(tokens[1].trim());
                 String make = tokens[2];
                 String model = tokens[3];
                 String vehicleType = tokens[4];
                 String color = tokens[5];
-                int odometer = Integer.parseInt(tokens[6]);
+                int odometer = Integer.parseInt(tokens[6].trim());
                 BigDecimal price = BigDecimal.valueOf(Double.parseDouble(tokens[7]));
 
                 vehicle = new Vehicle(vin, year, make, model,vehicleType, color, odometer, price);
@@ -35,10 +36,10 @@ public class DealershipFileManagement {
         }
         return dealership;
     }
-    public void saveDealership() {
+    public void saveDealership(Dealership dealership) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("inventory.csv"))) {
-            writer.write(getDealership().getName() + " | " + getDealership().getAddress() + " | " + getDealership().getAddress());
-            for (Vehicle vehicle : getDealership().getAllVehicles()) {
+            writer.write(dealership.getName() + " | " + dealership.getAddress() + " | " + dealership.getPhone());
+            for (Vehicle vehicle : dealership.getAllVehicles()) {
                 writer.write("\n" + vehicle.toString());
             }
         } catch (IOException e) {
