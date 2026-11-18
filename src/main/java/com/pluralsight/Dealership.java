@@ -41,25 +41,100 @@ public class Dealership {
     }
 
     public List<Vehicle> getVehiclesByPrice(BigDecimal min, BigDecimal max) {
-        return List.of();
+        List<Vehicle> results = new ArrayList<>();
+        boolean found = false;
+        for (Vehicle vehicle : inventory) {
+            if ((vehicle.getPrice().compareTo(min) >= 0) && (vehicle.getPrice().compareTo(max) <= 0)) {
+                results.add(vehicle);
+                found = true;
+            }
+        }
+        if (!found) {
+            System.out.println("No results found");
+        }
+
+        return results;
     }
     public List<Vehicle> getVehiclesByMakeModel(String make, String model) {
-        return List.of();
+        List<Vehicle> results = new ArrayList<>();
+        boolean found = false;
+        for (Vehicle vehicle : inventory) {
+            if (vehicle.getMake().toLowerCase().contains(make.toLowerCase()) || vehicle.getModel().toLowerCase().contains(model.toLowerCase())) {
+                results.add(vehicle);
+                found = true;
+            }
+        }
+        if (!found) {
+            System.out.println("No results found");
+        }
+
+        return results;
     }
     public List<Vehicle> getVehiclesByYear(int min, int max) {
-        return List.of();
+
+        List<Vehicle> results = new ArrayList<>();
+        boolean found = false;
+        for (Vehicle vehicle : inventory) {
+            if ((vehicle.getYear() >= min) && (vehicle.getYear() <= max)) {
+                results.add(vehicle);
+                found = true;
+            }
+        }
+        if (!found) {
+            System.out.println("No results found");
+        }
+
+        return results;
     }
     public List<Vehicle> getVehiclesByColor(String color) {
-        return List.of();
+
+        List<Vehicle> results = new ArrayList<>();
+        boolean found = false;
+        for (Vehicle vehicle : inventory) {
+            if (vehicle.getColor().toLowerCase().contains(color.toLowerCase())) {
+                results.add(vehicle);
+                found = true;
+            }
+        }
+        if (!found) {
+            System.out.println("No results found");
+        }
+
+        return results;
     }
     public List<Vehicle> getVehiclesByMileage(int min, int max) {
-        return List.of();
+
+        List<Vehicle> results = new ArrayList<>();
+        boolean found = false;
+        for (Vehicle vehicle : inventory) {
+            if ((vehicle.getOdometer() >= min) && (vehicle.getOdometer() <= max)) {
+                results.add(vehicle);
+                found = true;
+            }
+        }
+        if (!found) {
+            System.out.println("No results found");
+        }
+
+        return results;
     }
     public List<Vehicle> getVehiclesByType(String vehicleType) {
-        return List.of();
+        List<Vehicle> results = new ArrayList<>();
+        boolean found = false;
+        for (Vehicle vehicle : inventory) {
+            if (vehicle.getVehicleType().toLowerCase().contains(vehicleType.toLowerCase())) {
+                results.add(vehicle);
+                found = true;
+            }
+        }
+        if (!found) {
+            System.out.println("No results found");
+        }
+
+        return results;
     }
     public List<Vehicle> getAllVehicles() {
-        return List.of();
+        return inventory;
     }
     public void addVehicle(Vehicle vehicle) {
         inventory.add(vehicle);

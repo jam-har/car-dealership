@@ -1,8 +1,6 @@
 package com.pluralsight;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
+import java.io.*;
 import java.math.BigDecimal;
 
 public class DealershipFileManagement {
@@ -17,7 +15,7 @@ public class DealershipFileManagement {
             String dealershipAddress = tokens[1];
             String dealershipNumber = tokens[2];
             dealership = new Dealership(dealershipName, dealershipAddress, dealershipNumber);
-            while (csvLine != null) {
+            while ((csvLine = bufferedReader.readLine()) != null) {
                 int vin = Integer.parseInt(tokens[0]);
                 int year = Integer.parseInt(tokens[1]);
                 String make = tokens[2];
@@ -37,5 +35,14 @@ public class DealershipFileManagement {
         }
         return dealership;
     }
-    public void saveDealership() {}
+    public void saveDealership() {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("inventory.csv"))) {
+            writer.write(getDealership().getName() + " | " + getDealership().getAddress() + " | " + getDealership().getAddress());
+            for (Vehicle vehicle : getDealership().getAllVehicles()) {
+                writer.write("\n" + vehicle.toString());
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

@@ -10,7 +10,7 @@ public class Vehicle {
     private String vehicleType;
     private String color;
     private int odometer;
-    BigDecimal price;
+    private BigDecimal price;
 
     public Vehicle(int vin, int year, String make, String model, String vehicleType, String color, int odometer, BigDecimal price) {
         this.vin = vin;
@@ -85,5 +85,17 @@ public class Vehicle {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
+    }
+
+    @Override
+    public String toString() {
+        return vin + " | "
+                + year + " | "
+                + make + " | "
+                + model + " | "
+                + vehicleType + " | "
+                + color + " | "
+                + odometer + " | "
+                + price;
     }
 }

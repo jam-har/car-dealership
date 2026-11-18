@@ -1,16 +1,17 @@
 package com.pluralsight;
+import java.math.BigDecimal;
 import java.util.*;
 
 public class UserInterface {
 
     private Dealership dealership;
+    Scanner scanner = new Scanner(System.in);
+    DealershipFileManagement dealershipFileManagement = new DealershipFileManagement();
 
-    public void UserInterface() {
-
-    };
+    public void UserInterface() {}
     public void display() {
         init();
-        Scanner scanner = new Scanner(System.in);
+
         boolean inMenu = true;
         while (inMenu) {
             System.out.println("Main Menu \n Please choose one of the following options");
@@ -43,20 +44,103 @@ public class UserInterface {
             }
 
         }
-    };
-    public void processGetByPriceRequest() {};
-    public void processGetByMakeModelRequest() {};
-    public void processGetByYearRequest() {};
-    public void processGetByColorRequest() {};
-    public void processGetByMileageRequest() {};
-    public void processGetByVehicleTypeRequest() {};
+    }
+    public void processGetByPriceRequest() {
+        System.out.println("Enter your minimum price");
+        BigDecimal min = BigDecimal.valueOf(scanner.nextInt());
+        scanner.nextLine();
+        System.out.println("Enter your maximum price");
+        BigDecimal max = BigDecimal.valueOf(scanner.nextInt());
+        scanner.nextLine();
+        dealership.getVehiclesByPrice(min, max);
+    }
+    public void processGetByMakeModelRequest() {
+        System.out.println("Enter the make");
+        String make = scanner.nextLine().trim();
+        System.out.println("Enter the model");
+        String model = scanner.nextLine().trim();
+        dealership.getVehiclesByMakeModel(make, model);
+    }
+    public void processGetByYearRequest() {
+        System.out.println("Enter the newest year");
+        int min = scanner.nextInt();
+        scanner.nextLine();
+        System.out.println("Enter the oldest year");
+        int max = scanner.nextInt();
+        scanner.nextLine();
+        dealership.getVehiclesByYear(min, max);
+    }
+    public void processGetByColorRequest() {
+        System.out.println("Enter the color");
+        String color = scanner.nextLine().trim();
+        dealership.getVehiclesByColor(color);
+    }
+    public void processGetByMileageRequest() {
+        System.out.println("Enter the minimum mileage");
+        int min = scanner.nextInt();
+        scanner.nextLine();
+        System.out.println("Enter the maximum mileage");
+        int max = scanner.nextInt();
+        scanner.nextLine();
+        dealership.getVehiclesByMileage(min, max);
+    }
+    public void processGetByVehicleTypeRequest() {
+        System.out.println("Enter the vehicle type (car, truck, SUV, van");
+        String type = scanner.nextLine().trim();
+        dealership.getVehiclesByType(type);
+    }
     public void processGetAllVehiclesRequest() {
         displayVehicles(dealership.getAllVehicles());
-    };
-    public void processAddVehicleRequest() {};
-    public void processRemoveVehicleRequest() {};
+    }
+    public void processAddVehicleRequest() {
+        System.out.println("Enter the VIN");
+        int vin = scanner.nextInt();
+        scanner.nextLine();
+        System.out.println("Enter the year");
+        int year = scanner.nextInt();
+        scanner.nextInt();
+        System.out.println("Enter the make");
+        String make = scanner.nextLine();
+        System.out.println("Enter the model");
+        String model = scanner.nextLine();
+        System.out.println("Enter the vehicle body style (SUV, car, van, truck, etc.)");
+        String vehicleType = scanner.nextLine();
+        System.out.println("Enter the color");
+        String color = scanner.nextLine();
+        System.out.println("Enter the mileage from the odometer");
+        int odometer = scanner.nextInt();
+        scanner.nextLine();
+        System.out.println("Enter the price");
+        BigDecimal price = new BigDecimal(scanner.nextInt());
+
+        Vehicle vehicle = new Vehicle(vin, year, make, model, vehicleType, color, odometer, price);
+
+        System.out.println("You have added a vehicle");
+
+        dealershipFileManagement.saveDealership();
+
+    }
+    public void processRemoveVehicleRequest() {
+        System.out.println("Enter the VIN");
+        int vin = scanner.nextInt();
+        scanner.nextLine();
+        boolean found = false;
+        for (Vehicle vehicle : dealership.getAllVehicles()) {
+            if (vehicle.getVin() == vin) {
+                dealership.removeVehicle(vehicle);
+                found = true;
+            }
+        }
+        if (found){
+            System.out.println("The vehicle was removed from inventory");
+        }else {
+            System.out.println("No vehicles found");
+        }
+
+        dealershipFileManagement.saveDealership();
+
+    }
     private void init() {
-        DealershipFileManagement dealershipFileManagement = new DealershipFileManagement();
         this.dealership = dealershipFileManagement.getDealership();
     }
     private void displayVehicles(List list) {
